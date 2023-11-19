@@ -1,8 +1,9 @@
 package christmas.domain.event.policy;
 
-import christmas.domain.Reservation;
+import christmas.domain.EventResult;
+
+
 
 public interface EventPolicy {
-
-    <T> T apply(Reservation object);
+    EventResult apply(EventContext context);
 }

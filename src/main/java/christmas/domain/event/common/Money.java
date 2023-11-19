@@ -1,6 +1,7 @@
 package christmas.domain.event.common;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class Money {
     public static final Money ZERO = Money.wons(0);
@@ -21,5 +22,35 @@ public class Money {
         return new Money(this.amount.add(amount.amount));
     }
 
+    public Money minus(Money amount){
+        return new Money(this.amount.subtract(amount.amount));
+    }
 
+    public Money times(double percent){
+        return new Money(this.amount.multiply(BigDecimal.valueOf(percent)));
+    }
+    public boolean isGreaterThanOrEqual(Money wons) {
+        return amount.compareTo(wons.amount) >= 0;
+    }
+
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+
+        if (!(object instanceof Money)) {
+            return false;
+        }
+
+        Money other = (Money)object;
+        return Objects.equals(amount.doubleValue(), other.amount.doubleValue());
+    }
+
+    public int hashCode() {
+        return Objects.hashCode(amount);
+    }
+
+    public String toString() {
+        return amount.toString() + "원";
+    }
 }

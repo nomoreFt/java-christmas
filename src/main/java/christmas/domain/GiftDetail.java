@@ -1,4 +1,4 @@
 package christmas.domain;
 
-public class Badge {
+public class GiftDetail {
 }

@@ -1,36 +1,31 @@
 package christmas.domain.event.policy;
 
+
+import christmas.domain.DiscountDetail;
+import christmas.domain.EventCalendar;
+import christmas.domain.EventResult;
 import christmas.domain.Reservation;
 import christmas.domain.event.common.Money;
 import christmas.domain.event.condition.discount.DiscountEventCondition;
-import org.assertj.core.groups.Tuple;
+import christmas.dto.DiscountResult;
 
-import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class DiscountPolicy implements EventPolicy{
-    private Set<DiscountEventCondition> discountEventConditions = new LinkedHashSet<>();
-
-    public DiscountPolicy(DiscountEventCondition... discountEventConditions) {
-        this.discountEventConditions = new LinkedHashSet<>(Arrays.asList(discountEventConditions));
-    }
+public class DiscountPolicy implements EventPolicy {
+    private List<DiscountEventCondition> conditions;
 
     @Override
-    public DiscountResult apply(Reservation reservation) {
-        HashMap<DiscountEventCondition, Money> discountMap = new HashMap<>();
-        for (DiscountEventCondition condition : discountEventConditions) {
-            if (condition.isSatisfiedBy(reservation)) {
-                Money discountMoney = calculateDiscount(reservation, condition);
-                discountMap.put(condition, discountMoney);
+    public EventResult apply(EventContext context) {
+        List<DiscountDetail> discountList = new ArrayList<>();
+        // 할인 로직 구현
+        for(DiscountEventCondition condition : conditions){
+            if(condition.isSatisfiedBy(context)){
+                //discountList.add(...); // 할인 금액 계산
+                Money discountMoney = condition.getDiscountMoney(context);
+                discountList.add(DiscountDetail.of(condition, discountMoney));
             }
         }
-
-        return new DiscountResult(discountMap);
+        return DiscountResult.of(discountList);
     }
-
-    private Money calculateDiscount(Reservation reservation, DiscountEventCondition condition) {
-        // 할인 금액 계산 로직
-        return condition.getDiscountMoney(reservation);
-    }
-
 }

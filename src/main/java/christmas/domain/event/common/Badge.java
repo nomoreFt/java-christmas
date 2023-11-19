@@ -1,12 +1,14 @@
 package christmas.domain.event.common;
 
-public enum Gift {
+public enum Badge {
     Empty("없음"),
-    Champagne("샴페인");
+    Star("별"),
+    Tree("트리"),
+    Santa("산타");
 
     private String name;
 
-    Gift(String name) {
+    Badge(String name) {
         this.name = name;
     }
 
@@ -14,4 +16,5 @@ public enum Gift {
     public String toString() {
         return name;
     }
+
 }

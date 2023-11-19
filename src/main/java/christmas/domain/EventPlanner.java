@@ -1,29 +1,45 @@
 package christmas.domain;
 
 
-import christmas.domain.event.policy.DiscountPolicy;
-import christmas.domain.event.policy.DiscountResult;
-import christmas.domain.event.policy.GiftPolicy;
-import christmas.domain.event.policy.GiftResult;
+import christmas.domain.event.policy.*;
+import christmas.dto.BadgeResult;
+import christmas.dto.DiscountResult;
+import christmas.dto.GiftResult;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class EventPlanner {
-    private DiscountPolicy discountPolicy;
-    private GiftPolicy giftPolicy;
+    private EventCalendar eventCalendar;
+    private List<EventPolicy> eventPolicies = new ArrayList<>();
 
-    public EventPlanner(DiscountPolicy discountPolicy, GiftPolicy giftPolicy) {
-        this.discountPolicy = discountPolicy;
-        this.giftPolicy = giftPolicy;
+    public EventPlanner(EventCalendar eventCalendar, EventPolicy... eventPolicies) {
+        this.eventCalendar = eventCalendar;
+        this.eventPolicies = Arrays.asList(eventPolicies);
     }
 
-    public Restaurant.ReservationConfirmation expectEvent(Reservation reservation) {
-        //예약에 대해 각각 할인 정책을 적용하고, 결과값을 받음
-        //할인정책결과 - 충족된 할인 컨디션과 할인 금액
-        //사은품정책결과 - 충족된 사은품 컨디션과 사은품
-        DiscountResult apply = discountPolicy.apply(reservation);
-        GiftResult apply2 = giftPolicy.apply(reservation);
-        //ReservationConfirmation 생성
-        //
+    public ReservationConfirmation applyEvents(EventContext context) {
+        for (EventPolicy policy : eventPolicies) {
+            if (policy instanceof DiscountPolicy discountPolicy) {
+                //어떤 Condition과 할인 금액 리스트가 들어있는 DiscountResult
+                DiscountResult discountResult = (DiscountResult) discountPolicy.apply(context);
+                context.setTotalDiscountAmount(discountResult.calculateAllDiscountMoney());
+            } else if (policy instanceof GiftPolicy giftPolicy) {
+                //어떤 Condition과 Gift가 들어있는지 GiftResult
+                GiftResult apply = (GiftResult) giftPolicy.apply(context);
+            }
+        }
+        for(EventPolicy policy : eventPolicies){
+            if(policy instanceof BadgePolicy badgePolicy){
+                if (context.isCalculatedDiscount()) {
+                    //배지정보 추출
+                BadgeResult apply = (BadgeResult) badgePolicy.apply(context);
+                }
+            }
+        }
+
         return null;
     }
 }
