@@ -1,13 +1,25 @@
 package christmas.order;
 
+import christmas.restaurant.Menu;
+
+import java.util.List;
+
 public class OrderValidator {
-    public boolean validateDate(Date date) {
-        // 날짜 유효성 검증 로직
-        return true; // 예시
+    private Menu menu;
+    public void validateDate(int reservationDate) {
+        //checking beetween 1~31 reservationDate
+        if (reservationDate < 1 || reservationDate > 31) {
+            throw new IllegalArgumentException("Invalid reservation date: " + reservationDate);
+        }
     }
 
-    public boolean validateMenuItems(List<MenuItem> items) {
-        // 메뉴 아이템 유효성 검증 로직
-        return true; // 예시
+    public void validateMenuItems(List<OrderItem> items) {
+        //menu에서 menuItem을 찾아서 items에 있는 menuItem과 같은 음식이 있는지 체크한다.
+        items.stream()
+                .forEach(item -> {
+                    if (!menu.isAvailableMenu(item.menuName())) {
+                        throw new IllegalArgumentException("Menu item not found: " + item.menuName());
+                    }
+                });
     }
 }

@@ -1,4 +1,12 @@
 package christmas.event.condition;
 
-public class SpecialDiscountCondition {
+import christmas.event.DecemberEventCalendar;
+import christmas.restaurant.OrderContext;
+
+public class SpecialDiscountCondition implements EventCondition{
+    private DecemberEventCalendar decemberEventCalendar;
+    @Override
+    public boolean isSatisfied(OrderContext order) {
+        return decemberEventCalendar.isSpecialDay(order.reserveDate());
+    }
 }
