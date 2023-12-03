@@ -11,7 +11,5 @@ public abstract class EventPolicy {
         return (eventCondition.isSatisfied(order));
     }
 
-
-
     abstract protected void applyTo(OrderContext orderContext, EventExpectation eventExpectation);
 }

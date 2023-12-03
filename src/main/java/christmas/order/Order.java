@@ -18,7 +18,7 @@ public class Order {
     }
 
     public Reservation reserve(Customer customer) {
-        return new Reservation(this, customer, calculateEvent(reserveDate,items));
+        return Reservation.create(this, customer, calculateEvent(reserveDate,items));
     }
 
     private EventExpectation calculateEvent(LocalDate reserveDate, List<OrderItem> items) {

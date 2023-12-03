@@ -16,4 +16,10 @@ public record OrderContext(LocalDate reserveDate, List<OrderContextItem> orderFo
             .map(OrderContextItem::calculateOriginTotalCost)
             .reduce(Money.ZERO, Money::add);
     }
+
+    public long getOrderedFoodTypeCnt(FoodType foodType) {
+        return orderFoodItems.stream()
+            .filter(orderContextItem -> orderContextItem.isSameFoodType(foodType))
+            .count();
+    }
 }

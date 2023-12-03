@@ -15,4 +15,8 @@ public record OrderContextItem(
     public Money calculateOriginTotalCost() {
         return menuItem.price().multiply(count);
     }
+
+    public boolean isSameFoodType(FoodType foodType) {
+        return menuItem.isSameFoodType(foodType);
+    }
 }
