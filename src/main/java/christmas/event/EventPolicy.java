@@ -1,6 +1,5 @@
 package christmas.event;
 
-import christmas.event.condition.EventCondition;
 import christmas.order.EventExpectation;
 import christmas.restaurant.OrderContext;
 

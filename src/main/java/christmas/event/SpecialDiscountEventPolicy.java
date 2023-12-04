@@ -5,7 +5,7 @@ import christmas.order.EventExpectation;
 import christmas.restaurant.OrderContext;
 
 public class SpecialDiscountEventPolicy extends EventPolicy implements DiscountEventPolicy{
-    public final Money specialDayDiscountAmount = Money.of(1_000);
+    public final Money specialDayDiscountAmount = Money.won(1_000);
     @Override
     protected void applyTo(OrderContext orderContext, EventExpectation eventExpectation) {
         eventExpectation.addAppliedEvent(this);

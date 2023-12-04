@@ -5,11 +5,9 @@ import christmas.order.EventExpectation;
 import christmas.restaurant.FoodType;
 import christmas.restaurant.OrderContext;
 
-import java.time.LocalDate;
-
 public class WeekdayDiscountEventPolicy extends EventPolicy implements DiscountEventPolicy{
 
-    private final Money dessertDiscountAmount = Money.of(2_023);
+    private final Money dessertDiscountAmount = Money.won(2_023);
     @Override
     protected void applyTo(OrderContext orderContext, EventExpectation eventExpectation) {
         eventExpectation.addAppliedEvent(this);

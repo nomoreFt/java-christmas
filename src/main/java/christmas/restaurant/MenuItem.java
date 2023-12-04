@@ -9,7 +9,7 @@ public class MenuItem {
 
     public MenuItem(String menuName, int price, FoodType menuType) {
         this.menuName = menuName;
-        this.price = Money.of(price);
+        this.price = Money.won(price);
         this.menuType = menuType;
     }
 

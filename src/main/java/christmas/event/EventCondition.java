@@ -1,4 +1,4 @@
-package christmas.event.condition;
+package christmas.event;
 
 import christmas.restaurant.OrderContext;
 

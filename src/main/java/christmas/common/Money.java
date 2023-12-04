@@ -15,7 +15,7 @@ public class Money {
         this.value = value;
     }
 
-    public static Money of(long value) {
+    public static Money won(long value) {
         return new Money(value);
     }
 

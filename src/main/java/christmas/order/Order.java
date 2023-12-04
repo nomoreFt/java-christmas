@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Order {
+    private Customer customer;
     private Restaurant restaurant;
     private LocalDate reserveDate;
     private List<OrderItem> items;
@@ -17,7 +18,7 @@ public class Order {
         this.items = items;
     }
 
-    public Reservation reserve(Customer customer) {
+    public Reservation reserve() {
         return Reservation.create(this, customer, calculateEvent(reserveDate,items));
     }
 
