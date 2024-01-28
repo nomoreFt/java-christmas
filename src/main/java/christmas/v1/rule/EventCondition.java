@@ -1,7 +1,7 @@
 package christmas.v1.rule;
 
-import christmas.v1.Order;
+import christmas.v1.order.Order;
 
-public interface DiscountCondition {
+public interface EventCondition {
     boolean isSatisfiedBy(Order order);
 }

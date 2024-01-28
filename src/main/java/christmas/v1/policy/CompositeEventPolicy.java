@@ -1,7 +1,7 @@
 package christmas.v1.policy;
 
 import christmas.v1.EventPolicy;
-import christmas.v1.Order;
+import christmas.v1.order.Order;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

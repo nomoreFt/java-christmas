@@ -1,7 +1,7 @@
 package christmas.v1.policy;
 
 import christmas.v1.EventPolicy;
-import christmas.v1.Order;
+import christmas.v1.order.Order;
 import christmas.v1.rule.GiftRule;
 
 import java.util.ArrayList;
@@ -18,6 +18,10 @@ public final class GiftEventPolicy implements EventPolicy {
 
     @Override
     public void applyEvent(Order order) {
+        //order에 gift 추가
+        rules.stream()
+                .map(rule -> rule.calculateGift(order))
+                .forEach(gift -> order.addGift(gift));
 
     }
 }

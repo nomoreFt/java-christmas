@@ -34,4 +34,8 @@ public class Money {
     public boolean isGreaterThanOrEqual(Money other) {
         return value.compareTo(other.value) >= 0;
     }
+
+    public String toString() {
+        return value.toString();
+    }
 }
