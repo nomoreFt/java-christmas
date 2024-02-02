@@ -16,4 +16,12 @@ public class Menu {
     public Money getPrice() {
         return price;
     }
+
+    public boolean isSameName(String menuName) {
+        return this.name.equals(menuName);
+    }
+
+    public String getName() {
+        return name;
+    }
 }

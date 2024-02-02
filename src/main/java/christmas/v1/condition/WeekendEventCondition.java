@@ -5,7 +5,7 @@ import christmas.v1.order.Order;
 import christmas.v1.rule.BenefitDescription;
 import christmas.v1.rule.EventCondition;
 
-public class WeekendEventCondition implements EventCondition, BenefitDescription
+public class WeekendEventCondition implements EventCondition, BenefitDescription{
     private EventCalendar eventCalendar;
     @Override
     public boolean isSatisfiedBy(Order order) {
@@ -17,5 +17,5 @@ public class WeekendEventCondition implements EventCondition, BenefitDescription
             return "주말 할인";
         }
 
-} {
 }
+
