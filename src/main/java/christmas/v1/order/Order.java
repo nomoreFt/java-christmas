@@ -1,8 +1,6 @@
 package christmas.v1.order;
 
-import christmas.v1.EventPolicy;
-import christmas.v1.Gift;
-import christmas.v1.Money;
+import christmas.v1.*;
 import christmas.v1.menu.MenuType;
 import christmas.v1.order.event.EventBenefit;
 import christmas.v1.order.event.EventResult;
@@ -29,7 +27,7 @@ public class Order {
 
 
     //할인 전 총 주문 금액
-    public Money getTotalAmounts() {
+    public Money calculateBeforeDiscountAmount() {
         return items.stream()
                 .map(OrderItem::getPrice)
                 .reduce(Money.ZERO, Money::add);
@@ -68,5 +66,17 @@ public class Order {
 
     public List<OrderItem> getOrderItems() {
         return Collections.unmodifiableList(items);
+    }
+
+    public List<GiftItem> calculateAppliedGifts() {
+        return eventResult.getGifts();
+    }
+
+    public List<EventBenefit> calculateAppliedBenefits() {
+        return eventResult.getBenefits();
+    }
+
+    public Badge calculateAppliedBadge() {
+        return Badge.calculateBadge(eventResult.getTotalBenefitPrice());
     }
 }

@@ -11,6 +11,9 @@ public enum Gift {
         this.name = name;
         this.price = Money.won(price);
     }
+    public String getName() {
+        return name;
+    }
     public Money getPrice() {
         return price;
     }

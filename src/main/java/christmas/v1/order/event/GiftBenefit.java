@@ -2,15 +2,17 @@ package christmas.v1.order.event;
 
 
 import christmas.v1.Gift;
+import christmas.v1.GiftItem;
+import christmas.v1.Money;
 import christmas.v1.rule.BenefitDescription;
 
 public class GiftBenefit implements EventBenefit {
     private String eventDescription;
-    private Gift benefit;
+    private GiftItem benefit;
 
     public GiftBenefit(String eventDescription, Gift benefit){
-
-        this.benefit = benefit;
+        this.eventDescription = eventDescription;
+        this.benefit = new GiftItem(benefit, 1);
     }
 
     public static GiftBenefit of(BenefitDescription benefitDescription, Gift benefit){
@@ -18,6 +20,16 @@ public class GiftBenefit implements EventBenefit {
     }
     @Override
     public String getDescription() {
-        return eventDescription + ": -" + benefit.getPrice() + "원)";
+        return eventDescription + ": -" + benefit.getGiftPrice() + "원)";
+    }
+
+    @Override
+    public Money getBenefitAmount() {
+        return benefit.getGiftPrice();
+    }
+
+    @Override
+    public Money getDiscountAmount() {
+        return Money.ZERO;
     }
 }

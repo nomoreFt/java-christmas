@@ -6,6 +6,7 @@ import christmas.v1.order.Order;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+
 public final class CompositeEventPolicy implements EventPolicy {
     private final Map<EventPolicy, Integer> priorityPolicies = new LinkedHashMap<>();
 

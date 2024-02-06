@@ -12,6 +12,6 @@ public class OrderApplyEventService {
 
     public OrderResult requestOrder(Order order) {
         order.applyEvent(eventPolicy);
-        return new OrderResult(order);
+        return OrderResult.from(order);
     }
 }

@@ -21,4 +21,14 @@ public class DiscountBenefit implements EventBenefit{
     public String getDescription() {
         return eventDescription+ ": -" + benefit.toString() + "원";
     }
+
+    @Override
+    public Money getBenefitAmount() {
+        return benefit;
+    }
+
+    @Override
+    public Money getDiscountAmount() {
+        return benefit;
+    }
 }
