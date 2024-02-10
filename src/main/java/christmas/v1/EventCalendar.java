@@ -8,9 +8,14 @@ public class EventCalendar {
     private LocalDate eventStartDate;
     private LocalDate eventEndDate;
 
-    public EventCalendar(LocalDate eventStartDate, LocalDate eventEndDate) {
+    private EventCalendar(LocalDate eventStartDate, LocalDate eventEndDate) {
         this.eventStartDate = eventStartDate;
         this.eventEndDate = eventEndDate;
+    }
+
+    //of
+    public static EventCalendar of(LocalDate eventStartDate, LocalDate eventEndDate) {
+        return new EventCalendar(eventStartDate, eventEndDate);
     }
 
     public LocalDate getEventStartDate() {

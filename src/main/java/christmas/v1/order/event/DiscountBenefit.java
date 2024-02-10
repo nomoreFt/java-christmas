@@ -1,17 +1,17 @@
 package christmas.v1.order.event;
 
 import christmas.v1.Money;
-import christmas.v1.rule.BenefitDescription;
+import christmas.v1.rule.RuleDescription;
 
 public class DiscountBenefit implements EventBenefit{
     private String eventDescription;
     private Money benefit;
 
-    public DiscountBenefit(String eventDescription, Money benefit){
+    private DiscountBenefit(String eventDescription, Money benefit){
         this.benefit = benefit;
     }
 
-    public static DiscountBenefit of(BenefitDescription benefitDescription, Money benefit){
+    public static DiscountBenefit createWith(RuleDescription benefitDescription, Money benefit){
         return new DiscountBenefit(benefitDescription.getDescription(), benefit);
     }
 

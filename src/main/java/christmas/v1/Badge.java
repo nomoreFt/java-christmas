@@ -2,37 +2,36 @@ package christmas.v1;
 
 
 public enum Badge {
-    NONE("없음"),
-    STAR("별"),
-    TREE("트리"),
-    SANTA("산타");
+    NONE("없음", 0),
+    STAR("별", 1),
+    TREE("트리", 2),
+    SANTA("산타", 3);
 
     private final String description;
+    private final int priority;
 
-    Badge(String description) {
+    Badge(String description, int priority) {
         this.description = description;
+        this.priority = priority;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public static Badge calculateBadge(Money discountAmount) {
-        if (discountAmount.isGreaterThanOrEqual(Money.won(20_000))) {
-            return Badge.SANTA;
-        }
-        if (discountAmount.isGreaterThanOrEqual(Money.won(10_000))) {
-            return Badge.TREE;
-        }
-        if (discountAmount.isGreaterThanOrEqual(Money.won(5_000))) {
-            return Badge.STAR;
-        }
-        return Badge.NONE;
-    }
+
 
     //toString
     @Override
     public String toString() {
         return description;
+    }
+
+    public boolean isHigherThan(Badge badge) {
+        return this.priority > badge.priority;
+    }
+
+    public int getPriority() {
+        return priority;
     }
 }

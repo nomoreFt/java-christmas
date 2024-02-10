@@ -11,6 +11,14 @@ import java.util.List;
 public final class GiftEventPolicy implements EventPolicy {
     private List<GiftRule> rules = new ArrayList<>();
 
+    private GiftEventPolicy(GiftRule... initialRules) {
+        addRule(initialRules);
+    }
+
+    public static GiftEventPolicy of(GiftRule... initialRules) {
+        return new GiftEventPolicy(initialRules);
+    }
+
     public void addRule(GiftRule... rules) {
         this.rules.addAll(Arrays.asList(rules));
     }

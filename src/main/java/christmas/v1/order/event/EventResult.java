@@ -1,5 +1,6 @@
 package christmas.v1.order.event;
 
+import christmas.v1.Badge;
 import christmas.v1.Gift;
 import christmas.v1.GiftItem;
 import christmas.v1.Money;
@@ -9,14 +10,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class EventResult {
-    private Money totalDiscountAmount;
-    private List<GiftItem> gifts;
-    private List<EventBenefit> benefits;
-
-    public EventResult() {
-        this.totalDiscountAmount = Money.ZERO;
-        benefits = new ArrayList<>();
-    }
+    private Money totalDiscountAmount = Money.ZERO;
+    private List<GiftItem> gifts = new ArrayList<>();
+    private List<EventBenefit> benefits = new ArrayList<>();
+    private Badge badge = Badge.NONE;
 
     public void addBenefit(EventBenefit benefit) {
         benefits.add(benefit);
@@ -51,5 +48,15 @@ public class EventResult {
         return benefits.stream()
                 .map(EventBenefit::getBenefitAmount)
                 .reduce(Money.ZERO, Money::add);
+    }
+
+    public void assignBadge(Badge hightesBadge) {
+        if (hightesBadge.isHigherThan(badge)) {
+            badge = hightesBadge;
+        }
+    }
+
+    public Badge getBadge() {
+        return badge;
     }
 }

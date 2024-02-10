@@ -13,12 +13,16 @@ public final class DiscountEventPolicy implements EventPolicy {
     private List<DiscountRule> discountRules;
 
     //리스트 불변 유지
-    public DiscountEventPolicy(DiscountRule... initialRules) {
+    private DiscountEventPolicy(DiscountRule... initialRules) {
         discountRules = new ArrayList<>();
         addRule(initialRules);
     }
 
-    private void addRule(DiscountRule... rules) {
+    public static DiscountEventPolicy of(DiscountRule... initialRules) {
+        return new DiscountEventPolicy(initialRules);
+    }
+
+    public void addRule(DiscountRule... rules) {
         this.discountRules.addAll(Arrays.asList(rules));
     }
 

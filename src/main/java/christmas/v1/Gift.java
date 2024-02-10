@@ -2,7 +2,7 @@ package christmas.v1;
 
 public enum Gift {
     NONE("없음",0)
-    ,CHAMPAGNE("샴페인",25000);
+    ,CHAMPAGNE("샴페인",25_000);
 
     private final String name;
     private final Money price;

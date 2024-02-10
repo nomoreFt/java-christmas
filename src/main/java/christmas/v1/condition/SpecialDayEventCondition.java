@@ -2,18 +2,22 @@ package christmas.v1.condition;
 
 import christmas.v1.EventCalendar;
 import christmas.v1.order.Order;
-import christmas.v1.rule.BenefitDescription;
 import christmas.v1.rule.EventCondition;
 
-public class SpecialDayEventCondition implements EventCondition, BenefitDescription {
+public class SpecialDayEventCondition implements EventCondition {
     private EventCalendar eventCalendar;
+
+    private SpecialDayEventCondition(EventCalendar eventCalendar) {
+        this.eventCalendar = eventCalendar;
+    }
+
+    public static SpecialDayEventCondition create(EventCalendar eventCalendar) {
+        return new SpecialDayEventCondition(eventCalendar);
+    }
+
     @Override
     public boolean isSatisfiedBy(Order order) {
         return eventCalendar.isSpecialDay(order.getOrderedDate());
     }
 
-    @Override
-    public String getDescription() {
-        return "특별 할인";
-    }
 }

@@ -75,8 +75,15 @@ public class Order {
     public List<EventBenefit> calculateAppliedBenefits() {
         return eventResult.getBenefits();
     }
+    public void assignBadge(Badge hightesBadge) {
+        eventResult.assignBadge(hightesBadge);
+    }
 
-    public Badge calculateAppliedBadge() {
-        return Badge.calculateBadge(eventResult.getTotalBenefitPrice());
+    public Badge getAppliedBadge() {
+        return eventResult.getBadge();
+    }
+
+    public Money calculateTotalBenefitAmount() {
+        return eventResult.getTotalBenefitPrice();
     }
 }

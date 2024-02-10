@@ -9,13 +9,17 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public class ChristmasDdayDiscountCalculator implements DiscountCalculator {
-    private static final Money START_DISCOUNT_AMOUNT = Money.won(1000); // 할인 시작 금액
+    private static final Money START_DISCOUNT_AMOUNT = Money.won(1_000); // 할인 시작 금액
     private static final Money DAILY_INCREMENT_AMOUNT = Money.won(100); // 일일 증가 금액
 
     private EventCalendar eventCalendar;
 
-    public ChristmasDdayDiscountCalculator(EventCalendar eventCalendar) {
+    private ChristmasDdayDiscountCalculator(EventCalendar eventCalendar) {
         this.eventCalendar = eventCalendar;
+    }
+
+    public static ChristmasDdayDiscountCalculator create(EventCalendar eventCalendar) {
+        return new ChristmasDdayDiscountCalculator(eventCalendar);
     }
 
     @Override

@@ -4,18 +4,18 @@ package christmas.v1.order.event;
 import christmas.v1.Gift;
 import christmas.v1.GiftItem;
 import christmas.v1.Money;
-import christmas.v1.rule.BenefitDescription;
+import christmas.v1.rule.RuleDescription;
 
 public class GiftBenefit implements EventBenefit {
     private String eventDescription;
     private GiftItem benefit;
 
-    public GiftBenefit(String eventDescription, Gift benefit){
+    private GiftBenefit(String eventDescription, Gift benefit){
         this.eventDescription = eventDescription;
         this.benefit = new GiftItem(benefit, 1);
     }
 
-    public static GiftBenefit of(BenefitDescription benefitDescription, Gift benefit){
+    public static GiftBenefit createWith(RuleDescription benefitDescription, Gift benefit){
         return new GiftBenefit(benefitDescription.getDescription(), benefit);
     }
     @Override

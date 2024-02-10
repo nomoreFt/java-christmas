@@ -26,7 +26,7 @@ public class OrderResult {
         this.totalBeforeDiscount = order.calculateBeforeDiscountAmount();
         this.gifts = order.calculateAppliedGifts();
         this.benefits = order.calculateAppliedBenefits();
-        this.badge = order.calculateAppliedBadge();
+        this.badge = order.getAppliedBadge();
     }
 
     public static OrderResult from(Order order) {
@@ -63,7 +63,7 @@ public class OrderResult {
                 .reduce(Money.ZERO, Money::add);
     }
     public Badge getBadge() {
-        return Badge.calculateBadge(calculateBenefitAmount());
+        return badge;
     }
 
     public List<EventBenefit> getBenefits() {
