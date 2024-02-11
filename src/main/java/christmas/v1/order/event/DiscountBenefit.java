@@ -8,6 +8,7 @@ public class DiscountBenefit implements EventBenefit{
     private Money benefit;
 
     private DiscountBenefit(String eventDescription, Money benefit){
+        this.eventDescription = eventDescription;
         this.benefit = benefit;
     }
 
@@ -19,7 +20,7 @@ public class DiscountBenefit implements EventBenefit{
 
     @Override
     public String getDescription() {
-        return eventDescription+ ": -" + benefit.toString() + "원";
+        return eventDescription;
     }
 
     @Override

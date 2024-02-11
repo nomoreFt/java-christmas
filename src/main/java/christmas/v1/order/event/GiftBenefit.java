@@ -18,9 +18,10 @@ public class GiftBenefit implements EventBenefit {
     public static GiftBenefit createWith(RuleDescription benefitDescription, Gift benefit){
         return new GiftBenefit(benefitDescription.getDescription(), benefit);
     }
+
     @Override
     public String getDescription() {
-        return eventDescription + ": -" + benefit.getGiftPrice() + "원)";
+        return eventDescription;
     }
 
     @Override

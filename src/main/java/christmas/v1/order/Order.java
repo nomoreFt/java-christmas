@@ -42,7 +42,7 @@ public class Order {
     public long countOrderItemBy(MenuType menuType) {
         return items.stream()
                 .filter(orderItem -> orderItem.isSameType(menuType))
-                .count();
+                .reduce(0L, (count, orderItem) -> count + orderItem.getCount(), Long::sum);
     }
 
     //할인 정책을 적용한다.
@@ -85,5 +85,9 @@ public class Order {
 
     public Money calculateTotalBenefitAmount() {
         return eventResult.getTotalBenefitPrice();
+    }
+
+    public Money calculateTotalAfterDiscount() {
+        return calculateBeforeDiscountAmount().minus(eventResult.getTotalDiscountPrice());
     }
 }

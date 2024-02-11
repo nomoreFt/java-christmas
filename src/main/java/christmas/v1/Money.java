@@ -1,6 +1,8 @@
 package christmas.v1;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class Money {
     //zero
@@ -36,6 +38,7 @@ public class Money {
     }
 
     public String toString() {
-        return value.toString();
+        NumberFormat formatter = NumberFormat.getNumberInstance(Locale.getDefault());
+        return formatter.format(value);
     }
 }

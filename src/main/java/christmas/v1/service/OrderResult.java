@@ -9,64 +9,32 @@ import christmas.v1.order.event.DiscountBenefit;
 import christmas.v1.order.event.EventBenefit;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class OrderResult {
-    private LocalDate orderedDate;
-    private List<OrderItem> orderList;
-    private Money totalBeforeDiscount;
-    private List<GiftItem> gifts;
-    private List<EventBenefit> benefits;
-    private Badge badge;
+public record OrderResult(
+        LocalDate orderedDate,
+        List<OrderItem> orderList,
+        Money totalBeforeDiscount,
+        List<GiftItem> gifts,
+        List<EventBenefit> benefits,
 
-    private OrderResult(Order order) {
-        this.orderedDate = order.getOrderedDate();
-        this.orderList = order.getOrderItems();
-        this.totalBeforeDiscount = order.calculateBeforeDiscountAmount();
-        this.gifts = order.calculateAppliedGifts();
-        this.benefits = order.calculateAppliedBenefits();
-        this.badge = order.getAppliedBadge();
-    }
+        Money totalBenefitAmount,
+        Money totalAfterDiscount,
+        Badge badge
+) {
 
     public static OrderResult from(Order order) {
-        return new OrderResult(order);
-    }
-
-    public LocalDate getOrderedDate() {
-        return orderedDate;
-    }
-
-    public List<OrderItem> getOrderList() {
-        return Collections.unmodifiableList(orderList);
-    }
-
-    public Money getTotalBeforeDiscount() {
-        return totalBeforeDiscount;
-    }
-
-    public List<GiftItem> getGifts() {
-        return Collections.unmodifiableList(gifts);
-    }
-
-    public Money calculateAfterDiscountAmount() {
-        //DiscountBenefit만
-        return benefits.stream()
-                .filter(benefit -> benefit instanceof DiscountBenefit)
-                .map(EventBenefit::getDiscountAmount)
-                .reduce(Money.ZERO, Money::add);
-    }
-
-    public Money calculateBenefitAmount() {
-        return benefits.stream()
-                .map(EventBenefit::getBenefitAmount)
-                .reduce(Money.ZERO, Money::add);
-    }
-    public Badge getBadge() {
-        return badge;
-    }
-
-    public List<EventBenefit> getBenefits() {
-        return Collections.unmodifiableList(benefits);
+        return new OrderResult(
+                order.getOrderedDate(),
+                Collections.unmodifiableList(new ArrayList<>(order.getOrderItems())),
+                order.calculateBeforeDiscountAmount(),
+                Collections.unmodifiableList(new ArrayList<>(order.calculateAppliedGifts())),
+                Collections.unmodifiableList(new ArrayList<>(order.calculateAppliedBenefits())),
+                order.calculateTotalBenefitAmount(),
+                order.calculateTotalAfterDiscount(),
+                order.getAppliedBadge()
+        );
     }
 }

@@ -25,6 +25,9 @@ public class OrderItem {
     public Money getPrice() {
         return menu.getPrice().multiply(count);
     }
+    public long getCount() {
+        return count;
+    }
 
     @Override
     public String toString() {

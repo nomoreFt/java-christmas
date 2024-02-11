@@ -9,6 +9,16 @@ public class Menu {
     private String name;
     private Money price;
 
+    private Menu(String name, int price, MenuType menuType) {
+        this.name = name;
+        this.price = Money.won(price);
+        this.menuType = menuType;
+    }
+
+    public static Menu of(String name, int price, MenuType menuType) {
+        return new Menu(name, price, menuType);
+    }
+
     public boolean isSameType(MenuType menuType) {
         return this.menuType == menuType;
     }

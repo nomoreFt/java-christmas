@@ -59,4 +59,8 @@ public class EventResult {
     public Badge getBadge() {
         return badge;
     }
+
+    public Money getTotalDiscountPrice() {
+        return totalDiscountAmount;
+    }
 }
