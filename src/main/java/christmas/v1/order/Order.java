@@ -1,9 +1,7 @@
 package christmas.v1.order;
 
-import christmas.v1.*;
+import christmas.v1.common.Money;
 import christmas.v1.menu.MenuType;
-import christmas.v1.order.event.EventBenefit;
-import christmas.v1.order.event.EventResult;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -46,9 +44,10 @@ public class Order {
     }
 
     //할인 정책을 적용한다.
-    public void applyEvent(EventPolicy eventPolicy) {
-        eventPolicy.applyEvent(this); // 이벤트 적용
-        // 이벤트 적용 후 필요한 경우 추가 로직 구현
+    public void applyEvent(EventPolicy eventPolicy, EventValidator eventValidator) {
+        if(eventValidator.isEligibleForEvent(this)){
+            eventPolicy.applyEvent(this); // 이벤트 적용
+        }
     }
 
     public void addBenefit(EventBenefit benefit) {
@@ -69,11 +68,16 @@ public class Order {
     }
 
     public List<GiftItem> calculateAppliedGifts() {
-        return eventResult.getGifts();
+        //GIFT_NONE 필터링 추가
+        return eventResult.getGifts()
+                .stream()
+                .filter(giftItem -> giftItem.getGift() != Gift.NONE)
+                .toList();
     }
 
     public List<EventBenefit> calculateAppliedBenefits() {
         return eventResult.getBenefits();
+
     }
     public void assignBadge(Badge hightesBadge) {
         eventResult.assignBadge(hightesBadge);

@@ -1,8 +1,6 @@
 package christmas.v1.menu;
 
-import christmas.v1.Money;
-
-import javax.management.Query;
+import christmas.v1.common.Money;
 
 public class Menu {
     private MenuType menuType;

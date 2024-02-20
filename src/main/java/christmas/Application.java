@@ -1,29 +1,31 @@
 package christmas;
 
-import christmas.v1.*;
-import christmas.v1.calculator.ChristmasDdayDiscountCalculator;
-import christmas.v1.calculator.SpecialDayDiscountCalculator;
-import christmas.v1.calculator.WeekdayDiscountCalculator;
-import christmas.v1.calculator.WeekendDiscountCalculator;
-import christmas.v1.condition.*;
+import camp.nextstep.edu.missionutils.Console;
+import christmas.v1.adapter.io.ConsoleInputEventHandler;
+import christmas.v1.adapter.io.ConsoleOutputEventHandler;
+import christmas.v1.adapter.io.valid.OrderClientInputValidator;
 import christmas.v1.menu.Menu;
 import christmas.v1.menu.MenuBoard;
 import christmas.v1.menu.MenuType;
-import christmas.v1.policy.BadgeEventPolicy;
-import christmas.v1.policy.CompositeEventPolicy;
-import christmas.v1.policy.DiscountEventPolicy;
-import christmas.v1.policy.GiftEventPolicy;
-import christmas.v1.rule.BadgeRule;
-import christmas.v1.rule.DiscountRule;
-import christmas.v1.rule.GiftRule;
-import christmas.v1.rule.RuleDescription;
-import christmas.v1.service.ConsoleAdapter;
-import christmas.v1.service.MenuParser;
+import christmas.v1.order.Badge;
+import christmas.v1.order.EventValidator;
+import christmas.v1.order.Gift;
+import christmas.v1.order.policy.BadgeEventPolicy;
+import christmas.v1.order.policy.CompositeEventPolicy;
+import christmas.v1.order.policy.DiscountEventPolicy;
+import christmas.v1.order.policy.GiftEventPolicy;
+import christmas.v1.order.policy.rule.BadgeRule;
+import christmas.v1.order.policy.rule.DiscountRule;
+import christmas.v1.order.policy.rule.GiftRule;
+import christmas.v1.order.policy.rule.RuleDescription;
+import christmas.v1.adapter.ConsoleAdapter;
+import christmas.v1.adapter.io.MenuParser;
+import christmas.v1.order.policy.rule.calculator.*;
+import christmas.v1.order.policy.rule.condition.*;
 import christmas.v1.service.MenuReaderService;
 import christmas.v1.service.OrderApplyEventService;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
@@ -50,9 +52,9 @@ public class Application {
         /**
          * 서비스 구성
          */
-
+        EventValidator eventValidator = new EventValidator();
         //주문 이벤트 적용 서비스
-        OrderApplyEventService orderApplyEventService = new OrderApplyEventService(compositeEventPolicy);
+        OrderApplyEventService orderApplyEventService = new OrderApplyEventService(compositeEventPolicy, eventValidator);
         //메뉴 리더 서비스
         MenuReaderService menuReaderService = new MenuReaderService(menuBoard);
 
@@ -62,8 +64,8 @@ public class Application {
 
         //메뉴파서 - Adapter - Service 사이 계층
         MenuParser menuParser = new MenuParser(menuReaderService);
-
-        ConsoleInputEventHandler consoleInputEventHandler = new ConsoleInputEventHandler(menuParser);
+        OrderClientInputValidator orderClientInputValidator = new OrderClientInputValidator();
+        ConsoleInputEventHandler consoleInputEventHandler = new ConsoleInputEventHandler(orderClientInputValidator, menuParser);
         ConsoleOutputEventHandler consoleOutputEventHandler = new ConsoleOutputEventHandler();
         //콘솔어댑터
         ConsoleAdapter consoleAdapter = new ConsoleAdapter(orderApplyEventService,
@@ -71,6 +73,7 @@ public class Application {
                 consoleOutputEventHandler);
 
         consoleAdapter.startInteraction();
+        Console.close();
     }
 
     private static MenuBoard createBoardWithMenus() {

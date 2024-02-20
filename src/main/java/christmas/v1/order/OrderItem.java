@@ -1,6 +1,6 @@
 package christmas.v1.order;
 
-import christmas.v1.Money;
+import christmas.v1.common.Money;
 import christmas.v1.menu.Menu;
 import christmas.v1.menu.MenuType;
 
@@ -29,8 +29,12 @@ public class OrderItem {
         return count;
     }
 
-    @Override
-    public String toString() {
-        return menu.getName() + " " + count + "개";
+    public String getName() {
+        return menu.getName();
+    }
+
+    //menuType이 음료인지
+    public boolean isBeverage() {
+        return menu.isSameType(MenuType.DRINK);
     }
 }
