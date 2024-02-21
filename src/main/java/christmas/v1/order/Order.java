@@ -23,18 +23,25 @@ public class Order {
         return new Order(orderedDate, items);
     }
 
+    public LocalDate getOrderedDate() {
+        return orderedDate;
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return Collections.unmodifiableList(items);
+    }
+
+    public Badge getAppliedBadge() {
+        return eventResult.getBadge();
+    }
 
     //할인 전 총 주문 금액
     public Money calculateBeforeDiscountAmount() {
         return items.stream()
-                .map(OrderItem::getPrice)
+                .map(OrderItem::calculateTotalPrice)
                 .reduce(Money.ZERO, Money::add);
     }
 
-
-    public LocalDate getOrderedDate() {
-        return orderedDate;
-    }
 
     //메뉴 타입으로 주문 항목 개수를 구한다.
     public long countOrderItemBy(MenuType menuType) {
@@ -63,9 +70,7 @@ public class Order {
         eventResult.addDiscountAmount(discountAmount);
     }
 
-    public List<OrderItem> getOrderItems() {
-        return Collections.unmodifiableList(items);
-    }
+
 
     public List<GiftItem> calculateAppliedGifts() {
         //GIFT_NONE 필터링 추가
@@ -77,15 +82,11 @@ public class Order {
 
     public List<EventBenefit> calculateAppliedBenefits() {
         return eventResult.getBenefits();
-
     }
     public void assignBadge(Badge hightesBadge) {
         eventResult.assignBadge(hightesBadge);
     }
 
-    public Badge getAppliedBadge() {
-        return eventResult.getBadge();
-    }
 
     public Money calculateTotalBenefitAmount() {
         return eventResult.getTotalBenefitPrice();
