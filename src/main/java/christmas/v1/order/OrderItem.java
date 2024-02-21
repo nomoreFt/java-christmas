@@ -22,7 +22,7 @@ public class OrderItem {
         return menu.isSameType(menuType);
     }
 
-    public Money getPrice() {
+    public Money calculateTotalPrice() {
         return menu.getPrice().multiply(count);
     }
     public long getCount() {
