@@ -6,21 +6,20 @@ import christmas.v1.order.EventPolicy;
 import christmas.v1.order.EventValidator;
 import christmas.v1.order.Order;
 import christmas.v1.service.dto.OrderResult;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.util.Collections;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.BDDMockito.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.BDDMockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class OrderApplyEventServiceTest {
@@ -44,6 +43,7 @@ class OrderApplyEventServiceTest {
     }
 
     @Test
+    @DisplayName("requestOrder 메서드는 Order에 이벤트를 적용하고 OrderResult를 반환한다")
     void requestOrderShouldReturnCorrectOrderResult() {
         // given
         OrderResult expectedOrderResult = OrderResult.from(order);
