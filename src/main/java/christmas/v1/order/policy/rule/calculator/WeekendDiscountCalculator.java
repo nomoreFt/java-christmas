@@ -16,7 +16,7 @@ public class WeekendDiscountCalculator implements DiscountCalculator {
     }
     @Override
     public Money calculateDiscount(Order order) {
-        //디저트메뉴 1개당 2,023원 할인
+        //메인메뉴 1개당 2,023원 할인
         //order의 Menu
         return DISCOUNT_PER_MAIN.multiply(order.countOrderItemBy(MenuType.MAIN));
     }

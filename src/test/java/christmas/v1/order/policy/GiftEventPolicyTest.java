@@ -1,20 +1,20 @@
 package christmas.v1.order.policy;
 
+import christmas.config.UnitTest;
 import christmas.v1.order.Gift;
 import christmas.v1.order.Order;
 import christmas.v1.order.policy.rule.GiftRule;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.verify;
 import static org.mockito.BDDMockito.when;
 import static org.mockito.Mockito.never;
 
-@ExtendWith(MockitoExtension.class)
+@UnitTest
+@DisplayName("Domain > Order > 선물 EventPolicy")
 class GiftEventPolicyTest {
     @Mock
     GiftRule giftRule1;

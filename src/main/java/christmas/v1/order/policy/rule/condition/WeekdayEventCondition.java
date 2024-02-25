@@ -18,7 +18,7 @@ public class WeekdayEventCondition implements EventCondition {
 
     @Override
     public boolean isSatisfiedBy(Order order) {
-        // 주문일자가 크리스마스 D-day 이벤트 기간에 포함되는지 확인
+        // 주문일자가 평일인지 확인
         return eventCalendar.isWeekday(order.getOrderedDate());
     }
 

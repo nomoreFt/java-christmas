@@ -1,5 +1,6 @@
 package christmas.v1.order;
 
+import christmas.config.UnitTest;
 import christmas.v1.common.Money;
 import christmas.v1.menu.Menu;
 import christmas.v1.menu.MenuType;
@@ -10,8 +11,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -19,7 +18,9 @@ import java.util.List;
 
 import static org.mockito.BDDMockito.*;
 
-@ExtendWith(MockitoExtension.class)
+
+@UnitTest
+@DisplayName("Domain > Order")
 class OrderTest {
     EventPolicy policy = mock(EventPolicy.class);
     EventValidator validator = mock(EventValidator.class);

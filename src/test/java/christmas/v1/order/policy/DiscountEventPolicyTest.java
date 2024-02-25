@@ -1,18 +1,18 @@
 package christmas.v1.order.policy;
 
+import christmas.config.UnitTest;
 import christmas.v1.common.Money;
 import christmas.v1.order.Order;
 import christmas.v1.order.policy.rule.DiscountRule;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.BDDMockito.verify;
 import static org.mockito.BDDMockito.when;
 
-@ExtendWith(MockitoExtension.class)
+@UnitTest
+@DisplayName("Domain > Order > 할인 EventPolicy")
 class DiscountEventPolicyTest {
     @Mock DiscountRule discountRule;
     @Mock DiscountRule discountRule2;

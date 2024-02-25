@@ -1,5 +1,6 @@
 package christmas.v1.service;
 
+import christmas.config.UnitTest;
 import christmas.v1.common.Money;
 import christmas.v1.order.Badge;
 import christmas.v1.order.EventPolicy;
@@ -9,10 +10,8 @@ import christmas.v1.service.dto.OrderResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -21,7 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.when;
 
-@ExtendWith(MockitoExtension.class)
+@UnitTest
+@DisplayName("Service > OrderApplyEventService")
 class OrderApplyEventServiceTest {
 
     @Mock private EventPolicy eventPolicy;

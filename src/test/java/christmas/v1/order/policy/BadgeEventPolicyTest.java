@@ -1,18 +1,18 @@
 package christmas.v1.order.policy;
 
+import christmas.config.UnitTest;
 import christmas.v1.order.Badge;
 import christmas.v1.order.Order;
 import christmas.v1.order.policy.rule.BadgeRule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.BDDMockito.*;
 
-@ExtendWith(MockitoExtension.class)
+@UnitTest
+@DisplayName("Domain > Order > 뱃지 EventPolicy")
 class BadgeEventPolicyTest {
     @Mock
     BadgeRule badgeRule1;
